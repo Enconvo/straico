@@ -16,9 +16,19 @@
     {
       "name": "straico_chat",
       "title": "Straico Chat",
-      "description": "You can chat with models supported by Straico, and it supports file uploads and YouTube links as context.",
+      "description": "You can chat with models supported by Straico",
       "icon": "icon.png",
       "mode": "no-view",
+      "parameters": {
+        "context_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The file path to be processed"
+          },
+          "description": "The files to be processed"
+        }
+      },
       "preferences": [
         {
           "name": "prompt",
@@ -88,6 +98,25 @@
           ]
         }
       ]
+    },
+    {
+      "name": "create_rag",
+      "title": "Create Straico RAG",
+      "description": "Create Straico RAG",
+      "mode": "view",
+      "icon": "icon.png",
+      "preferences": [
+        {
+          "name": "api_key",
+          "description": "How to get api key? [🔑here](https://straico.com/)",
+          "type": "password",
+          "required": false,
+          "title": "API Key",
+          "default": "",
+          "defaultProxy": "KEY_STRAICO_APIKEY",
+          "placeholder": "Straico Api Key"
+        }
+      ]
     }
   ],
   "dependencies": {
@@ -100,7 +129,8 @@
     "eslint": "^8.57.0",
     "prettier": "^2.8.8",
     "tsup": "^7.2.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@types/react": "18.2.27"
   },
   "scripts": {
     "lint": "eslint src",

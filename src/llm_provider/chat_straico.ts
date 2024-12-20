@@ -51,6 +51,8 @@ export class StraicoProvider extends LLMProvider {
             return message.files
         }).flat()
 
+        console.log("files", files)
+
         const lastMessage = newMessages.pop();
         const userInput = lastMessage?.text.text()
 

@@ -23,8 +23,9 @@
     "noUnusedParameters": true,
     "useDefineForClassFields": true,
     "strictPropertyInitialization": false,
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
   "exclude": ["node_modules/", "dist/", "tests/"],
-  "include": ["./src", "../../examples/src/tts.ts"]
+  "include": ["./src"]
 }
