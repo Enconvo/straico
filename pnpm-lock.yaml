@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@enconvo/api':
-        specifier: ^0.1.154
-        version: 0.1.154
+        specifier: ^0.1.156
+        version: 0.1.156
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -39,8 +39,8 @@ importers:
 
 packages:
 
-  '@enconvo/api@0.1.154':
-    resolution: {integrity: sha512-Hl4UF55TRxDT1Lyfu08Er/w6Mpe9uvqc3V91KvJMYB52ioNkzqL+cDDgeG6g9/nhnYOl78NlUf3gGwsOQgtLmg==}
+  '@enconvo/api@0.1.156':
+    resolution: {integrity: sha512-rlKCXWtn6lX0gIfByixOwL4TMuGa/pky/Hi+Ki41vhVO3FPS/kHjM0L45+bSB84qDxOtOHC+vWAKtJcCkCm6aQ==}
     hasBin: true
 
   '@esbuild/android-arm64@0.18.20':
@@ -967,7 +967,7 @@ packages:
 
 snapshots:
 
-  '@enconvo/api@0.1.154': {}
+  '@enconvo/api@0.1.156': {}
 
   '@esbuild/android-arm64@0.18.20':
     optional: true

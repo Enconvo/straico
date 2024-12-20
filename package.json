@@ -100,6 +100,73 @@
       ]
     },
     {
+      "name": "straico_rag",
+      "title": "Straico RAG",
+      "description": "You can chat with rags supported by Straico",
+      "icon": "icon.png",
+      "mode": "no-view",
+      "parameters": {
+        "input_text": {
+          "type": "string",
+          "description": "The text to be processed"
+        },
+        "selection_text": {
+          "type": "string",
+          "description": "The selected text to be processed"
+        }
+      },
+      "preferences": [
+        {
+          "name": "ragName",
+          "description": "The rag to generate the completion.",
+          "type": "dropdown",
+          "required": false,
+          "title": "Rag Name",
+          "default": "",
+          "dataProxy": "straico|rag_list"
+        },
+        {
+          "name": "modelName",
+          "description": "The model to generate the completion.",
+          "type": "dropdown",
+          "required": false,
+          "title": "Model Name",
+          "default": "openai/gpt-4o-mini",
+          "dataProxy": "llm|straico_models"
+        },
+        {
+          "name": "api_key",
+          "description": "How to get api key? [🔑here](https://straico.com/)",
+          "type": "password",
+          "required": false,
+          "title": "API Key",
+          "default": "",
+          "defaultProxy": "KEY_STRAICO_APIKEY",
+          "placeholder": "Straico Api Key"
+        }
+      ]
+    },
+    {
+      "name": "rag_list",
+      "title": "RAG list",
+      "description": "You can chat with rags supported by Straico",
+      "icon": "icon.png",
+      "mode": "no-view",
+      "showInCommandList": false,
+      "preferences": [
+        {
+          "name": "api_key",
+          "description": "How to get api key? [🔑here](https://straico.com/)",
+          "type": "password",
+          "required": false,
+          "title": "API Key",
+          "default": "",
+          "defaultProxy": "KEY_STRAICO_APIKEY",
+          "placeholder": "Straico Api Key"
+        }
+      ]
+    },
+    {
       "name": "create_rag",
       "title": "Create Straico RAG",
       "description": "Create Straico RAG",
@@ -120,17 +187,17 @@
     }
   ],
   "dependencies": {
-    "@enconvo/api": "^0.1.154",
+    "@enconvo/api": "^0.1.156",
     "axios": "^1.7.9",
     "form-data": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.19.33",
+    "@types/react": "18.2.27",
     "eslint": "^8.57.0",
     "prettier": "^2.8.8",
     "tsup": "^7.2.0",
-    "typescript": "^5.4.5",
-    "@types/react": "18.2.27"
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "lint": "eslint src",

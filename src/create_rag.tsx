@@ -39,6 +39,14 @@ export default function App() {
                     setState("loading")
 
                     const response = await createRAG(data)
+                    if (response.error) {
+                        setState("create")
+                        showHUD(
+                            //@ts-ignore
+                            `create Straico RAG failed,${response.error.message}`
+                        )
+                        return;
+                    }
                     console.log("response", response)
 
                     showHUD(
@@ -65,9 +73,10 @@ export default function App() {
         formdata.append('name', data.title);
         formdata.append('description', data.description || 'description');
 
-        const filePath = '/Users/ysnows/Desktop/WHY.pdf'
-        const file = createReadStream(filePath)
-        formdata.append('files', file);
+        for (let item of data.files) {
+            const file = createReadStream(item.path)
+            formdata.append('files', file);
+        }
 
         const options = Command.getOptions()
         console.log("options:", JSON.stringify(options, null, 2))
