@@ -1,5 +1,5 @@
 import { Action, Command, environment, LLMProvider, EnconvoResponse, RequestOptions, BaseChatMessage, UserMessage, ResponseAction } from "@enconvo/api";
-import { StraicoRAGProvider } from "./llm_provider/rag_straico_provider.ts";
+import { StraicoRAGProvider } from "./provider/rag_straico_provider.ts";
 
 interface Params extends RequestOptions, LLMProvider.LLMOptions {
 

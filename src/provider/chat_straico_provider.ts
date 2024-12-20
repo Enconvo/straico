@@ -1,8 +1,10 @@
 import { AssistantMessage, BaseChatMessage, BaseChatMessageChunk, ChatMessageContentText, LLMProvider, Stream } from "@enconvo/api";
 import axios from 'axios'
+import { createReadStream } from 'node:fs';
+import FormData from 'form-data';
 
 
-export class StraicoRAGProvider extends LLMProvider {
+export class StraicoProvider extends LLMProvider {
 
     constructor(options: LLMProvider.LLMOptions) {
         super(options)
@@ -11,38 +13,37 @@ export class StraicoRAGProvider extends LLMProvider {
 
     protected async _call(content: { messages: BaseChatMessage[]; }): Promise<BaseChatMessage> {
         const response = await this.request(content.messages)
-        if (response.error) {
-            return new AssistantMessage(response.error.message)
-        }
 
-        return new AssistantMessage(response.answer)
+        return new AssistantMessage(response)
     }
 
     protected async _stream(content: { messages: BaseChatMessage[]; }): Promise<Stream<BaseChatMessageChunk>> {
-        const response = await this._call(content)
+
+
+        const response = await this.request(content.messages)
+
 
         async function* iterator(): AsyncIterator<BaseChatMessageChunk, any, undefined> {
-            yield response
+            yield new AssistantMessage(response)
         }
 
         const controller = new AbortController();
+
         return new Stream(iterator, controller);
 
     }
 
 
-    initParams() {
-
-        return {
-            model: this.options.modelName.value,
-            ragId: this.options.ragName.value
-        }
-
-    }
 
 
     async request(messages: BaseChatMessage[]) {
         const newMessages = await this.convertMessagesToStraicoMessages(messages)
+
+        const files = newMessages.map((message) => {
+            return message.files
+        }).flat()
+
+        console.log("files", files)
 
         const lastMessage = newMessages.pop();
         const userInput = lastMessage?.text.text()
@@ -55,8 +56,11 @@ export class StraicoRAGProvider extends LLMProvider {
         const prompt = `history messages:\n${history}\n\nuser input:\n${userInput}`
 
         var data = JSON.stringify({
-            "model": this.options.modelName.value,
-            "prompt": prompt,
+            "models": [
+                this.options.modelName.value,
+            ],
+            "message": prompt,
+            "temperature": this.options.temperature.value
         });
 
         console.log("data", data)
@@ -64,7 +68,7 @@ export class StraicoRAGProvider extends LLMProvider {
         var config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: `https://api.straico.com/v0/rag/${this.options.ragName.value}/prompt`,
+            url: 'https://api.straico.com/v1/prompt/completion',
             headers: {
                 'Authorization': `Bearer ${this.options.api_key}`,
                 'Content-Type': 'application/json'
@@ -72,20 +76,15 @@ export class StraicoRAGProvider extends LLMProvider {
             data: data
         };
 
+        console.log("config", JSON.stringify(config))
 
         try {
             const response = await axios(config)
-            if (response.data.success === false) {
-                return {
-                    error: {
-                        message: "failed to response from straico",
-                    }
-                }
-            }
+            const modelResponse = response.data.data.completions[this.options.modelName.value]
+            const modelResponseContent = modelResponse.completion.choices[0].message.content
+            console.log(modelResponseContent)
+            return modelResponseContent
 
-            const modelResponse = response.data.response
-            console.log("modelResponse", JSON.stringify(modelResponse, null, 2))
-            return modelResponse
         } catch (error) {
             console.log(error)
         }
@@ -108,10 +107,17 @@ export class StraicoRAGProvider extends LLMProvider {
                 return item.text
             })
 
+            const images = message.content.filter((item) => {
+                return item.type === "image_url"
+            }).filter((item) => item.image_url.url.startsWith("file://")).map(async (item) => {
+                const url = item.image_url.url
+                return await this.uploadFile(url)
+            })
+            const files = await Promise.all(images)
 
             return {
                 text: new BaseChatMessage(role, [new ChatMessageContentText(content.join("\n"))]),
-                files: []
+                files: files
             }
         }
     }
@@ -123,5 +129,32 @@ export class StraicoRAGProvider extends LLMProvider {
         return await Promise.all(newMessages)
     }
 
+
+    private async uploadFile(fileUrl: string): Promise<string> {
+        return ""
+        var data = new FormData();
+        const file = createReadStream(fileUrl.replaceAll("file://", ""))
+        data.append('file', file);
+
+        var config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://api.straico.com/v0/file/upload',
+            headers: {
+                'Authorization': `Bearer ${this.options.api_key}`,
+                'Content-Type': 'multipart/form-data',
+                ...data.getHeaders()
+            },
+            data: data
+        };
+
+        try {
+            const response = await axios(config)
+            return response.data.data.url
+        } catch (error) {
+            console.log(error)
+            return ""
+        }
+    }
 
 }
