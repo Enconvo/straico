@@ -1,7 +1,6 @@
 import { FilePicker, Action, Form, TextField, showToast, Command, LoadingIndicator, TextArea, ResponseAction, showHUD } from "@enconvo/api";
 import { useState } from "react";
 import axios from 'axios';
-import fs from 'fs';
 import FormData from "form-data";
 import { createReadStream } from 'node:fs';
 
@@ -14,9 +13,7 @@ type Values = {
 
 export default function App() {
     const [state, setState] = useState("create")
-    const [loadingText, setLoadingText] = useState("loading")
-
-
+    const [loadingText, setLoadingText] = useState("creating Straico RAG...")
 
 
     const actions: ResponseAction[] = [
@@ -28,12 +25,19 @@ export default function App() {
                     })
                     return;
                 }
-                // if (!data.files || data.files.length === 0) {
-                //     await showHUD(
-                //         'Please upload files'
-                //     )
-                //     return;
-                // }
+                if (!data.files || data.files.length === 0) {
+                    await showHUD(
+                        'Please upload files'
+                    )
+                    return;
+                }
+
+                if (!data.files || data.files.length > 4) {
+                    await showHUD(
+                        'Please upload no more than 4 files'
+                    )
+                    return;
+                }
 
                 try {
                     setState("loading")
