@@ -1,0 +1,113 @@
+{
+  "$schema": "https://enconvo.com/schemas/extension.json",
+  "name": "straico",
+  "version": "0.0.1",
+  "description": "Straico integration for Enconvo",
+  "title": "Straico",
+  "icon": "icon.png",
+  "author": "Enconvo",
+  "license": "MIT",
+  "type": "module",
+  "minAppVersion": "1.8.8",
+  "categories": [
+    "Bot"
+  ],
+  "commands": [
+    {
+      "name": "straico_chat",
+      "title": "Straico Chat",
+      "description": "You can chat with models supported by Straico, and it supports file uploads and YouTube links as context.",
+      "icon": "icon.png",
+      "mode": "no-view",
+      "preferences": [
+        {
+          "name": "prompt",
+          "description": "Prompt (the prompt content helps set the behavior of the assistant. e.g. 'You are Steve Jobs, the creator of Apple' )",
+          "type": "multiline_textfield",
+          "required": false,
+          "placeholder": "Prompt (the prompt content helps set the behavior of the assistant. e.g. 'You are Steve Jobs, the creator of Apple' )",
+          "default": "You are a helpful assistant.",
+          "title": "Prompt"
+        },
+        {
+          "name": "user_prompt_1",
+          "description": "Prompt (the prompt content helps set the behavior of the assistant. e.g. 'You are Steve Jobs, the creator of Apple' )",
+          "type": "multiline_textfield",
+          "required": false,
+          "placeholder": "Prompt (the prompt content helps set the behavior of the assistant. e.g. 'You are Steve Jobs, the creator of Apple' )",
+          "default": "{{input_text}}{{selection_text}}",
+          "title": "User Message"
+        },
+        {
+          "name": "modelName",
+          "description": "The model to generate the completion.",
+          "type": "dropdown",
+          "required": false,
+          "title": "Model Name",
+          "default": "openai/gpt-4o-mini",
+          "dataProxy": "llm|straico_models"
+        },
+        {
+          "name": "api_key",
+          "description": "How to get api key? [🔑here](https://straico.com/)",
+          "type": "password",
+          "required": false,
+          "title": "API Key",
+          "default": "",
+          "defaultProxy": "KEY_STRAICO_APIKEY",
+          "placeholder": "Straico Api Key"
+        },
+        {
+          "name": "temperature",
+          "description": "What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.",
+          "type": "dropdown",
+          "required": false,
+          "title": "Temperature",
+          "default": 1,
+          "data": [
+            {
+              "title": "none",
+              "value": 0
+            },
+            {
+              "title": "low",
+              "value": 0.5
+            },
+            {
+              "title": "medium",
+              "value": 1
+            },
+            {
+              "title": "high",
+              "value": 1.5
+            },
+            {
+              "title": "maximum",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@enconvo/api": "^0.1.154",
+    "axios": "^1.7.9",
+    "form-data": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.33",
+    "eslint": "^8.57.0",
+    "prettier": "^2.8.8",
+    "tsup": "^7.2.0",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "npm run lint --fix",
+    "format": "prettier --write \"**/*.ts\"",
+    "format:check": "prettier --list-different \"**/*.ts\"",
+    "build": "enconvo",
+    "dev": "enconvo --dev"
+  }
+}
