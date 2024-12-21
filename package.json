@@ -245,7 +245,7 @@
     }
   ],
   "dependencies": {
-    "@enconvo/api": "^0.1.156",
+    "@enconvo/api": "^0.1.158",
     "axios": "^1.7.9",
     "form-data": "^4.0.1"
   },
