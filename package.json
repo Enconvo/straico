@@ -1,7 +1,7 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
   "name": "straico",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Straico integration for Enconvo",
   "title": "Straico",
   "icon": "icon.png",
@@ -254,7 +254,7 @@
     }
   ],
   "dependencies": {
-    "@enconvo/api": "^0.1.161",
+    "@enconvo/api": "^0.1.165",
     "axios": "^1.7.9",
     "form-data": "^4.0.1"
   },

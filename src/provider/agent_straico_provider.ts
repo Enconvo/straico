@@ -1,4 +1,4 @@
-import { AssistantMessage, BaseChatMessage, BaseChatMessageChunk, ChatMessageContentText, LLMProvider, Stream } from "@enconvo/api";
+import { AssistantMessage, BaseChatMessage, BaseChatMessageChunk, ChatMessageContent, LLMProvider, Stream, uuid } from "@enconvo/api";
 import axios from 'axios'
 
 
@@ -22,7 +22,20 @@ export class StraicoAgentProvider extends LLMProvider {
         const response = await this._call(content)
 
         async function* iterator(): AsyncIterator<BaseChatMessageChunk, any, undefined> {
-            yield response
+            yield {
+                model: "Straico",
+                id: uuid(),
+                choices: [{
+                    delta: {
+                        content: response.text(),
+                        role: "assistant"
+                    },
+                    finish_reason: null,
+                    index: 0
+                }],
+                created: Date.now(),
+                object: "chat.completion.chunk"
+            }
         }
 
         const controller = new AbortController();
@@ -86,7 +99,7 @@ export class StraicoAgentProvider extends LLMProvider {
 
         if (typeof message.content === "string") {
             return {
-                text: new BaseChatMessage(role, [new ChatMessageContentText(message.content)]),
+                text: new BaseChatMessage(role, [ChatMessageContent.text(message.content)]),
                 files: []
             }
         } else {
@@ -99,7 +112,7 @@ export class StraicoAgentProvider extends LLMProvider {
 
 
             return {
-                text: new BaseChatMessage(role, [new ChatMessageContentText(content.join("\n"))]),
+                text: new BaseChatMessage(role, [ChatMessageContent.text(content.join("\n"))]),
                 files: []
             }
         }
