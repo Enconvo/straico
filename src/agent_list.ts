@@ -49,6 +49,7 @@ export default async function main(req: Request): Promise<string> {
     const options = await req.json()
 
     options.url = 'https://api.straico.com/v0/agent/'
+    options.api_key = options.credentials.apiKey
 
     const modelCache = new DropdownListCache(fetchModels)
 

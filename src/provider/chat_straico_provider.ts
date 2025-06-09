@@ -83,7 +83,7 @@ export class StraicoProvider extends LLMProvider {
             maxBodyLength: Infinity,
             url: 'https://api.straico.com/v1/prompt/completion',
             headers: {
-                'Authorization': `Bearer ${this.options.api_key}`,
+                'Authorization': `Bearer ${this.options.credentials.apiKey}`,
                 'Content-Type': 'application/json'
             },
             data: data
@@ -154,7 +154,7 @@ export class StraicoProvider extends LLMProvider {
             maxBodyLength: Infinity,
             url: 'https://api.straico.com/v0/file/upload',
             headers: {
-                'Authorization': `Bearer ${this.options.api_key}`,
+                'Authorization': `Bearer ${this.options.credentials.apiKey}`,
                 'Content-Type': 'multipart/form-data',
                 ...data.getHeaders()
             },

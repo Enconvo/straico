@@ -1,7 +1,7 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
   "name": "straico",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Straico integration for Enconvo",
   "title": "Straico",
   "icon": "icon.png",
@@ -34,6 +34,20 @@
       },
       "preferences": [
         {
+          "name": "credentials",
+          "description": "The key management provider to use",
+          "type": "extension",
+          "required": false,
+          "default": "straico",
+          "extensionType": "credentials-provider",
+          "extensionFilter": {
+            "targetCommands": [
+              "credentials|straico"
+            ]
+          },
+          "title": "Credential Provider"
+        },
+        {
           "name": "prompt",
           "description": "Prompt (the prompt content helps set the behavior of the assistant. e.g. 'You are Steve Jobs, the creator of Apple' )",
           "type": "multiline_textfield",
@@ -59,16 +73,6 @@
           "title": "Model Name",
           "default": "openai/gpt-4o-mini",
           "dataProxy": "llm|straico_models"
-        },
-        {
-          "name": "api_key",
-          "description": "How to get api key? [🔑here](https://straico.com/)",
-          "type": "password",
-          "required": false,
-          "title": "API Key",
-          "default": "",
-          "defaultProxy": "KEY_STRAICO_APIKEY",
-          "placeholder": "Straico Api Key"
         },
         {
           "name": "temperature",
@@ -123,6 +127,20 @@
       },
       "preferences": [
         {
+          "name": "credentials",
+          "description": "The key management provider to use",
+          "type": "extension",
+          "required": false,
+          "default": "straico",
+          "extensionType": "credentials-provider",
+          "extensionFilter": {
+            "targetCommands": [
+              "credentials|straico"
+            ]
+          },
+          "title": "Credential Provider"
+        },
+        {
           "name": "ragName",
           "description": "The rag to generate the completion.",
           "type": "dropdown",
@@ -139,16 +157,6 @@
           "title": "Model Name",
           "default": "openai/gpt-4o-mini",
           "dataProxy": "llm|straico_models"
-        },
-        {
-          "name": "api_key",
-          "description": "How to get api key? [🔑here](https://straico.com/)",
-          "type": "password",
-          "required": false,
-          "title": "API Key",
-          "default": "",
-          "defaultProxy": "KEY_STRAICO_APIKEY",
-          "placeholder": "Straico Api Key"
         }
       ]
     },
@@ -173,6 +181,20 @@
       },
       "preferences": [
         {
+          "name": "credentials",
+          "description": "The key management provider to use",
+          "type": "extension",
+          "required": false,
+          "default": "straico",
+          "extensionType": "credentials-provider",
+          "extensionFilter": {
+            "targetCommands": [
+              "credentials|straico"
+            ]
+          },
+          "title": "Credential Provider"
+        },
+        {
           "name": "agentName",
           "description": "The agent to generate the completion.",
           "type": "dropdown",
@@ -180,16 +202,6 @@
           "title": "Agent Name",
           "default": "",
           "dataProxy": "straico|agent_list"
-        },
-        {
-          "name": "api_key",
-          "description": "How to get api key? [🔑here](https://straico.com/)",
-          "type": "password",
-          "required": false,
-          "title": "API Key",
-          "default": "",
-          "defaultProxy": "KEY_STRAICO_APIKEY",
-          "placeholder": "Straico Api Key"
         }
       ]
     },
@@ -202,14 +214,18 @@
       "showInCommandList": false,
       "preferences": [
         {
-          "name": "api_key",
-          "description": "How to get api key? [🔑here](https://straico.com/)",
-          "type": "password",
+          "name": "credentials",
+          "description": "The key management provider to use",
+          "type": "extension",
           "required": false,
-          "title": "API Key",
-          "default": "",
-          "defaultProxy": "KEY_STRAICO_APIKEY",
-          "placeholder": "Straico Api Key"
+          "default": "straico",
+          "extensionType": "credentials-provider",
+          "extensionFilter": {
+            "targetCommands": [
+              "credentials|straico"
+            ]
+          },
+          "title": "Credential Provider"
         }
       ]
     },
@@ -222,14 +238,18 @@
       "showInCommandList": false,
       "preferences": [
         {
-          "name": "api_key",
-          "description": "How to get api key? [🔑here](https://straico.com/)",
-          "type": "password",
+          "name": "credentials",
+          "description": "The key management provider to use",
+          "type": "extension",
           "required": false,
-          "title": "API Key",
-          "default": "",
-          "defaultProxy": "KEY_STRAICO_APIKEY",
-          "placeholder": "Straico Api Key"
+          "default": "straico",
+          "extensionType": "credentials-provider",
+          "extensionFilter": {
+            "targetCommands": [
+              "credentials|straico"
+            ]
+          },
+          "title": "Credential Provider"
         }
       ]
     },
@@ -241,14 +261,18 @@
       "icon": "icon.png",
       "preferences": [
         {
-          "name": "api_key",
-          "description": "How to get api key? [🔑here](https://straico.com/)",
-          "type": "password",
+          "name": "credentials",
+          "description": "The key management provider to use",
+          "type": "extension",
           "required": false,
-          "title": "API Key",
-          "default": "",
-          "defaultProxy": "KEY_STRAICO_APIKEY",
-          "placeholder": "Straico Api Key"
+          "default": "straico",
+          "extensionType": "credentials-provider",
+          "extensionFilter": {
+            "targetCommands": [
+              "credentials|straico"
+            ]
+          },
+          "title": "Credential Provider"
         }
       ]
     }

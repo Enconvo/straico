@@ -90,7 +90,7 @@ export default function App() {
             maxBodyLength: Infinity,
             url: 'https://api.straico.com/v0/rag',
             headers: {
-                'Authorization': `Bearer ${options.api_key}`,
+                'Authorization': `Bearer ${options.credentials.apiKey}`,
                 'Content-Type': 'multipart/form-data',
                 ...formdata.getHeaders()
 

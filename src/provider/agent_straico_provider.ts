@@ -68,7 +68,7 @@ export class StraicoAgentProvider extends LLMProvider {
             maxBodyLength: Infinity,
             url: `https://api.straico.com/v0/agent/${this.options.agentName.value}/prompt`,
             headers: {
-                'Authorization': `Bearer ${this.options.api_key}`,
+                'Authorization': `Bearer ${this.options.credentials.apiKey}`,
                 'Content-Type': 'application/json'
             },
             data: data
