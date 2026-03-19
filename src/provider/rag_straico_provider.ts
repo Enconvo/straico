@@ -27,7 +27,7 @@ export class StraicoRAGProvider extends LLMProvider {
                 id: uuid(),
                 choices: [{
                     delta: {
-                        content: response.text(),
+                        content: response.text,
                         role: "assistant"
                     },
                     finish_reason: null,
@@ -47,10 +47,10 @@ export class StraicoRAGProvider extends LLMProvider {
         const newMessages = await this.convertMessagesToStraicoMessages(messages)
 
         const lastMessage = newMessages.pop();
-        const userInput = lastMessage?.text.text()
+        const userInput = lastMessage?.text.text
 
         const history = newMessages.map((message) => {
-            return `${message.text.role}: ${message.text.text()}`
+            return `${message.text.role}: ${message.text.text}`
         }).join("\n")
 
 

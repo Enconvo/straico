@@ -1,8 +1,8 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
   "name": "straico",
-  "version": "0.0.4",
-  "description": "Straico integration for Enconvo",
+  "version": "0.0.87",
+  "description": "Straico platform integration providing chat with AI models, RAG-based document Q&A, and agent conversations through the Straico API, with support for creating and managing RAG knowledge bases.",
   "title": "Straico",
   "icon": "icon.png",
   "author": "Enconvo",
@@ -104,7 +104,8 @@
             }
           ]
         }
-      ]
+      ],
+      "private": true
     },
     {
       "name": "straico_rag",
@@ -158,7 +159,8 @@
           "default": "openai/gpt-4o-mini",
           "dataProxy": "llm|straico_models"
         }
-      ]
+      ],
+      "private": true
     },
     {
       "name": "straico_agent",
@@ -203,7 +205,8 @@
           "default": "",
           "dataProxy": "straico|agent_list"
         }
-      ]
+      ],
+      "private": true
     },
     {
       "name": "rag_list",
@@ -227,7 +230,8 @@
           },
           "title": "Credential Provider"
         }
-      ]
+      ],
+      "private": true
     },
     {
       "name": "agent_list",
@@ -251,7 +255,8 @@
           },
           "title": "Credential Provider"
         }
-      ]
+      ],
+      "private": true
     },
     {
       "name": "create_rag",
@@ -274,11 +279,12 @@
           },
           "title": "Credential Provider"
         }
-      ]
+      ],
+      "private": true
     }
   ],
   "dependencies": {
-    "@enconvo/api": "^0.1.165",
+    "@enconvo/api": "link:../../enconvo.nodejs/enconvo_api",
     "axios": "^1.7.9",
     "form-data": "^4.0.1"
   },
@@ -295,7 +301,7 @@
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write \"**/*.ts\"",
     "format:check": "prettier --list-different \"**/*.ts\"",
-    "build": "enconvo",
-    "dev": "enconvo --dev"
+    "build": "enconvo dev",
+    "dev": "enconvo dev --dev"
   }
 }

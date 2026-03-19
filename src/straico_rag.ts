@@ -25,8 +25,8 @@ export default async function main(req: Request): Promise<EnconvoResponse> {
     ];
 
     const llmProvider = new StraicoRAGProvider(options)
-    const resultMessage = await llmProvider.stream({ messages, autoHandle: true })
-    const result = resultMessage.text()
+    const resultMessage = await llmProvider.stream({ messages })
+    const result = resultMessage.text
 
     const actions: ResponseAction[] = [
         Action.Paste({ content: result }),

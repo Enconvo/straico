@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@enconvo/api':
-        specifier: ^0.1.165
-        version: 0.1.165
+        specifier: link:../../enconvo.nodejs/enconvo_api
+        version: link:../../enconvo.nodejs/enconvo_api
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -38,10 +38,6 @@ importers:
         version: 5.4.5
 
 packages:
-
-  '@enconvo/api@0.1.165':
-    resolution: {integrity: sha512-W9SZmzPJnMD2zbiUSVqf53Zcw9wtgvLqzIhKmo7a1QCIn2DCeE7xobzM/QwR8N7zJpR4Y0ltd62lX7NVWiF6XA==}
-    hasBin: true
 
   '@esbuild/android-arm64@0.18.20':
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==}
@@ -966,8 +962,6 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
-
-  '@enconvo/api@0.1.165': {}
 
   '@esbuild/android-arm64@0.18.20':
     optional: true

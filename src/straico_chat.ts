@@ -36,7 +36,7 @@ export default async function main(req: Request): Promise<Response> {
 
     const llmProvider = new StraicoProvider(options)
     const resultMessage = await llmProvider.stream({ messages })
-    const result = resultMessage.text()
+    const result = resultMessage.text
 
 
     const actions: ResponseAction[] = [
