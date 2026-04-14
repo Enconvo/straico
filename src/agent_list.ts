@@ -1,13 +1,11 @@
-import { DropdownListCache } from "@enconvo/api"
+import { ListCache, RequestOptions } from "@enconvo/api"
 
 
 /**
  * Fetches models from the API and transforms them into ModelOutput format
- * @param url - API endpoint URL
- * @param api_key - API authentication key
- * @returns Promise<ModelOutput[]> - Array of processed model data
  */
-async function fetchModels(url: string, api_key: string, type: string): Promise<DropdownListCache.ModelOutput[]> {
+async function fetchModels(options: RequestOptions): Promise<ListCache.ListItem[]> {
+    const { url, api_key } = options
     // console.log("fetchModels", url, api_key, type)
     try {
         const resp = await fetch(url, {
@@ -45,14 +43,14 @@ async function fetchModels(url: string, api_key: string, type: string): Promise<
  * @param req - Request object containing options
  * @returns Promise<string> - JSON string of model data
  */
-export default async function main(req: Request): Promise<string> {
+export default async function main(req: Request) {
     const options = await req.json()
 
     options.url = 'https://api.straico.com/v0/agent/'
     options.api_key = options.credentials.apiKey
 
-    const modelCache = new DropdownListCache(fetchModels)
+    const modelCache = new ListCache(fetchModels)
 
-    const models = await modelCache.getModelsCache(options)
-    return JSON.stringify(models)
+    const models = await modelCache.getList(options)
+    return Response.json(models)
 }

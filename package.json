@@ -1,7 +1,7 @@
 {
   "$schema": "https://enconvo.com/schemas/extension.json",
   "name": "straico",
-  "version": "0.0.87",
+  "version": "0.0.95",
   "description": "Straico platform integration providing chat with AI models, RAG-based document Q&A, and agent conversations through the Straico API, with support for creating and managing RAG knowledge bases.",
   "title": "Straico",
   "icon": "icon.png",
@@ -72,7 +72,7 @@
           "required": false,
           "title": "Model Name",
           "default": "openai/gpt-4o-mini",
-          "dataProxy": "llm|straico_models"
+          "dataProxy": "llm/straico_models"
         },
         {
           "name": "temperature",
@@ -148,7 +148,7 @@
           "required": false,
           "title": "Rag Name",
           "default": "",
-          "dataProxy": "straico|rag_list"
+          "dataProxy": "straico/rag_list"
         },
         {
           "name": "modelName",
@@ -157,7 +157,7 @@
           "required": false,
           "title": "Model Name",
           "default": "openai/gpt-4o-mini",
-          "dataProxy": "llm|straico_models"
+          "dataProxy": "llm/straico_models"
         }
       ],
       "private": true
@@ -203,7 +203,7 @@
           "required": false,
           "title": "Agent Name",
           "default": "",
-          "dataProxy": "straico|agent_list"
+          "dataProxy": "straico/agent_list"
         }
       ],
       "private": true
@@ -289,11 +289,11 @@
     "form-data": "^4.0.1"
   },
   "devDependencies": {
-    "@types/node": "^18.19.33",
+    "@types/node": "^25.5.0",
     "@types/react": "18.2.27",
     "eslint": "^8.57.0",
     "prettier": "^2.8.8",
-    "tsup": "^7.2.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.4.5"
   },
   "scripts": {
