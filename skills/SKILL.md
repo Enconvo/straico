@@ -4,7 +4,7 @@ description: >
   Straico platform integration providing chat with AI models, RAG-based document Q&A, and agent conversations through the Straico API, with support for creating and managing RAG knowledge bases.
 metadata:
   author: Enconvo
-  version: "0.0.95"
+  version: "0.0.131"
 ---
 
 ## API Reference
